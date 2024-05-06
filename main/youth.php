@@ -168,7 +168,7 @@ window.onload=startclock;
 <a  href="index.php"><button class="btn btn-default btn-large" style="float: left;"><i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
 			<?php 
 			include('../connect.php');
-				$result = $db->prepare("SELECT * FROM youth ORDER BY table_id ASC");
+				$result = $db->prepare("SELECT * FROM youth ORDER BY youth_id ASC");
 				$result->execute();
 				$rowcount = $result->rowcount();
 			?>
@@ -206,7 +206,7 @@ window.onload=startclock;
 				for($i=0; $row = $result->fetch(); $i++){
 				
 			?>
-			<td align="center"><a href="viewstudent.php?id=<?php echo $row['table_id']; ?>" title="View Member"><?php echo $row['username'] ?></a></td>
+			<td align="center"><a href="viewstudent.php?id=<?php echo $row['youth_id']; ?>" title="View Member"><?php echo $row['username'] ?></a></td>
 			<td><?php echo $row['first_name']; ?> <?php echo $row['middle_name']; ?> <?php echo $row['last_name']; ?></td>
 			<td><?php echo $row['gender']; ?></td>
 			<td><?php echo $row['date_of_birth']; ?></td>

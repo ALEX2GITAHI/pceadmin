@@ -226,7 +226,7 @@ window.onload=startclock;
 				while ($row = $result->fetch_assoc()) {
 			?>
 		
-			<td align="center"><a href="viewstudent.php?id=<?php echo $row['table_id']; ?>" title="View Member"><?php echo $row['username'] ?></a></td>
+			<td align="center"><a href="viewstudent.php?id=<?php echo $row['youth_id']; ?>" title="View Member"><?php echo $row['username'] ?></a></td>
 			<td><?php echo $row['first_name']; ?> <?php echo $row['middle_name']; ?> <?php echo $row['last_name']; ?></td>
 			<td><?php echo $row['gender']; ?></td>
 			<td><?php echo $row['date_of_birth']; ?></td>

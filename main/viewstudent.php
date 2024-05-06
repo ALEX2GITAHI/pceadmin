@@ -179,7 +179,7 @@ window.onload=startclock;
 <link href="../style.css" media="screen" rel="stylesheet" type="text/css" />
 <center><h4><i class="icon-edit icon-large"></i> Member Information</h4></center>
 <hr>
-<center><img src="../../pcea/uploads/<?php echo $row['file'];?>" class="roundimage2"  alt=""/>
+<center><img src="../../pceauser/uploads/<?php echo $row['file'];?>" class="roundimage2"  alt=""/>
 <br><br>
 <table>
 <tr>
