@@ -11,7 +11,7 @@
 	//Connect to mysqli server
 	$link = mysqli_connect('localhost','root','');
 	if(!$link) {
-		die('Failed to connect to server: ' . mysqli_error());
+		die('Failed to connect to server: ' . mysqli_error() );
 	}
 	
 	//Select database

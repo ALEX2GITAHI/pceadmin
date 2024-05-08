@@ -2,7 +2,7 @@ function validateForm()
 {
   var phone= document.getElementById("phone").value;
   var phone2= document.getElementById("phone2").value;
-  //let isPhoneValidated = validatePhoneNumber(phone);
+  let isPhoneValidated = validatePhoneNumber(phone);
   //let isPhoneValidated2 = validatePhoneNumber(phone2)
   //let isEmailValidated =  validateEmail();
   let isPasswordValidated = validatepassword() 
@@ -62,7 +62,7 @@ function validateEmail(){
 
 function validatepassword() {
   var password1 = document.getElementById("pswd1").value;
-  var password2 = document.getElementById("pswd2").value;
+  var password2 = document.getElementById("psw").value;
   if (password1 == password2){
     console.log("Password Length is :", password1.length)
     let pswdlength = password1.length;

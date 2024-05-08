@@ -31,7 +31,7 @@ form:after {
 }
 .container { margin: 25px auto; position: relative; width: 900px; }
 #content {
-	background: #f9f9f9;
+	background: #ee0303;
 	background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
 	background: -webkit-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
 	background: -o-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
@@ -67,7 +67,7 @@ form:after {
 	width: 27%;
 }
 #content h1:after {
-	background: rgb(126,126,126);
+	background: rgb(247, 5, 5);
 	background: -moz-linear-gradient(left,  rgba(126,126,126,1) 0%, rgba(255,255,255,1) 100%);
 	background: -webkit-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
 	background: -o-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
@@ -182,7 +182,7 @@ form:after {
 	width: 120px;
 }
 #content form input[type="submit"]:hover {
-	background: #51fe6e;}
+	background: #1678f8;}
 #content form div a {
 	color: #004a80;
     float: right;
@@ -225,5 +225,5 @@ form:after {
 }
 .button a:hover {
 	background-position: 0 -135px;
-	color: #00aeef;
+	color: #1cf3bd;
 }
