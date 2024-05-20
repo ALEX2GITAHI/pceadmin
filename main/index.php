@@ -136,11 +136,93 @@ if($position=='admin') {
 			<font style=" font:bold 44px 'Aleo'; color:#722290;"><center>Mukinyi's MMS</center></font>
 <div id="mainmain">
 
+<h4 class="font-weight-normal mb-3">Total Male Members <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+										</h4>                    
+										<?php 
+                    include('../connect.php');                  
+                    $results = $db->prepare("SELECT * FROM membership where gender='Male'");
+										$results->execute();
+                    $rowcount = $results->rowcount();
+										?>
+										<h2 class="mb-5"> <?php echo $rowcount;?></h2>
+									</div>
+								</div>
+     <style>
+      /* General reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-                   
-<a href="addstudent.php"><i class="icon-user icon-2x"></i><br> Add Member</a> 
-<a href="students.php"><i class="icon-group icon-2x"></i><br> Members</a>         
-<a href="district.php"><i class="icon-sitemap icon-2x"></i><br> District</a>    
+/* Styling for the h4 element */
+h4.font-weight-normal.mb-3 {
+    font-weight: normal;
+    margin-bottom: 1rem; /* 3 translates to approximately 1rem */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Styling for the icon inside h4 */
+h4.font-weight-normal.mb-3 i.mdi {
+    font-size: 24px;
+    float: right;
+}
+
+/* Styling for the h2 element */
+h2.mb-5 {
+    margin-bottom: 3rem; /* 5 translates to approximately 3rem */
+}
+
+/* Styling for the .stretch-card class */
+.stretch-card {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Styling for the .grid-margin class */
+.grid-margin {
+    margin-bottom: 30px; /* Example margin value */
+}
+
+/* Styling for the .card class */
+.card {
+    border-radius: 5px; /* Example border radius */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Styling for the .bg-gradient-info class */
+.bg-gradient-info {
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Styling for the .card-img-holder class */
+.card-img-holder {
+    position: relative;
+}
+
+/* Styling for the .text-white class */
+.text-white {
+    color: white;
+}
+
+/* Inline style for the height of the card */
+.card[style] {
+    height: 150px;
+}
+
+/* Styling for the .card-body class */
+.card-body {
+    padding: 20px; /* Example padding value */
+}
+
+     </style>
+							</div>
+							<div class="col-md-6 stretch-card grid-margin">
+								<div class="card bg-gradient-info card-img-holder text-white"style="height: 150px;">
+									<div class="card-body">  
 <?php
 }
 ?>
