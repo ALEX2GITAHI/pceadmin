@@ -140,7 +140,7 @@ if($position=='admin') {
 										</h4>                    
 										<?php 
                     include('../connect.php');                  
-                    $results = $db->prepare("SELECT * FROM membership where gender='Male'");
+                    $results = $db->prepare("SELECT * FROM membership where gender='female'");
 										$results->execute();
                     $rowcount = $results->rowcount();
 										?>
