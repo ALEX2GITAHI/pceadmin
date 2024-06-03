@@ -15,7 +15,9 @@ Membership System
         padding: 9px 0;
       }
     </style>
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="path/to/your/css/file.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="../style.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="src/facebox.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="lib/jquery.js" type="text/javascript"></script>
@@ -105,10 +107,10 @@ if($position=='admin') {
           <div class="well sidebar-nav">
               <ul class="nav nav-list">
               <li class="active"><a href="index.php"><i class="icon-dashboard icon-2x"></i> Dashboard </a></li> 
-			<li><a href="students.php"><i class="icon-group icon-2x"></i>Manage Members</a>       </li>
-			<li><a href="addstudent.php"><i class="icon-user icon-2x"></i>Add Member</a>         </li>
-			<li><a href="district.php"><i class="icon-sitemap icon-2x"></i>Districts</a>         </li>
-            <li><a href="groups.php"><i class="icon-sitemap icon-2x"></i>Groups</a>         </li>
+			<li><a href="youth.php"><i class="icon-group icon-2x"></i>Youths</a>       </li>
+			<li><a href="youthregistered.php"><i class="icon-user icon-2x"></i>Registered</a>         </li>
+			<li><a href="youthcard.php"><i class="icon-sitemap icon-2x"></i>Card Only</a>         </li>
+            <li><a href="youthnotregistered.php"><i class="icon-sitemap icon-2x"></i>Not Registered</a>         </li>
 
 
 			<br><br>	
@@ -126,19 +128,133 @@ if($position=='admin') {
         </div><!--/span-->
 	<div class="span10">
 	<div class="contentheader">
-			<i class="icon-dashboard"></i> PCEA Mukinyi Church
+			<i class="icon-dashboard"></i> PCEA Mukinyi Youth
 			</div>
 			<ul class="breadcrumb">
 			<li><a href="member.php">Dashboard</a></li> /
             <li><a href="groups.php">Groups</a></li> /
 			<li class="active">Youth</li>
 			</ul>
-			<font style=" font:bold 44px 'Aleo'; color:#722290;"><center>Mukinyi's MMS</center></font>
-<div id="mainmain">                 
-<a href="youthregistered.php"><i class="icon-group icon-2x"></i><br>Registered</a> 
-<a href="youthcard.php"><i class="icon-group icon-2x"></i><br>Card Only</a>         
-<a href="youthnotregistered.php"><i class="icon-group icon-2x"></i><br>Non Registered</a> 
-<a href="youth.php"><i class="icon-group icon-2x"></i><br>All Members</a>     
+			<font style=" font:bold 44px 'Aleo'; color:#722290;"><center>Youth Fellowship</center></font><br><br>
+			<div class="container">
+                    <div class="left-column">
+                        <div class="card bg-gradient-info card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Youth Members <i
+                                        class="mdi mdi-chart-line mdi-24px float-right"></i></h4>
+                                <?php 
+                        include('../connect.php');                  
+                        $results = $db->prepare("SELECT * FROM membership ");
+                        $results->execute();
+                        $rowcount = $results->rowcount();
+                        ?>
+                                <h2 class="mb-5"><?php echo $rowcount;?></h2>
+                            </div>
+                        </div>
+                        <div class="card bg-gradient-danger card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Registered<i
+                                        class="mdi mdi-bookmark-outline mdi-24px float-right"></i></h4>
+                                <?php
+                        include('../connect.php');                  
+                        $results = $db->prepare("SELECT * FROM guild ");
+                        $results->execute();
+                        $rowcount = $results->rowcount();
+                        ?>
+                                <h2 class="mb-5"><?php echo $rowcount;?></h2>
+                            </div>
+                        </div>
+                        <div class="card bg-gradient-success card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Card Only<i
+                                        class="mdi mdi-diamond mdi-24px float-right"></i></h4>
+                                <?php 
+                        include('../connect.php');                  
+                        $results = $db->prepare("SELECT * FROM pcmf ");
+                        $results->execute();
+                        $rowcount = $results->rowcount();
+                        ?>
+                                <h2 class="mb-5"><?php echo $rowcount;?></h2>
+                            </div>
+                        </div>
+                        <div class="card bg-gradient-purple card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Not Registered<i
+                                        class="mdi mdi-chart-line mdi-24px float-right"></i></h4>
+                                <?php
+                        include('../connect.php');                  
+                        $results = $db->prepare("SELECT * FROM youth ");
+                        $results->execute();
+                        $rowcount = $results->rowcount();
+                        ?>
+                                <h2 class="mb-5"><?php echo $rowcount;?></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <div class="chart-container">
+                            <canvas id="membershipChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                <?php
+                        include('../connect.php');                  
+                        $results = $db->prepare("SELECT gender, COUNT(*) as count FROM youth GROUP BY gender");
+                        $results->execute();
+                        $data = $results->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        $labels = [];
+                        $counts = [];
+
+                        foreach ($data as $row) {
+                            $labels[] = ucfirst($row['gender']);  // Capitalize first letter
+                            $counts[] = $row['count'];
+                        }
+                        ?>
+
+                const labels = <?php echo json_encode($labels); ?>;
+                const counts = <?php echo json_encode($counts); ?>;
+
+                const ctx = document.getElementById('membershipChart').getContext('2d');
+                const membershipChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Number of Members',
+                            data: counts,
+                            backgroundColor: ['#4e73df', '#1cc88a'],
+                            borderColor: ['#4e73df', '#1cc88a'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                </script>
+<div id="mainmain">                    
 <?php
 }
 ?>
